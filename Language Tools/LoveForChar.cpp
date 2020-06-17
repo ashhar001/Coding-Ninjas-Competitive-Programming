@@ -1,45 +1,48 @@
-Check Case
+Love for Characters
 Send Feedback
-Write a program that takes a character as input and prints either 1, 0 or -1 according to the following rules.
-1, if the character is an uppercase alphabet (A - Z)
-0, if the character is a lowercase alphabet (a - z)
--1, if the character is not an alphabet
-Input format :
-Single Character
-Output format :
-1 or 0 or -1
-Constraints :
-Input can be any character
-Sample Input 1 :
-v
-Sample Output 1 :
-0
-Sample Input 2 :
-V
-Sample Output 2 :
-1
-Sample Input 3 :
-#
-Sample Output 3 :
--1
+Ayush loves the characters ‘a’, ‘s’, and ‘p’. He got a string of lowercase letters and he wants to find out how many times characters ‘a’, ‘s’, and ‘p’ occurs in the string respectively. Help him find it out.
+Input:
+First line contains an integer denoting length of the string.
+Next line contains the string.
+Constraints:
+1<=n<=10^5
+‘a’<= each character of string <= ‘z’
+Output:
+Three space separated integers denoting the occurrence of letters ‘a’, ‘s’ and ‘p’ respectively.
+Sample Input:
+6
+aabsas
+Sample output:
+3 2 0
+	
+	
+/************************************************** SOLUTION ***********************************************/
+	
+	
+#include <bits/stdc++.h>
 
-
-/****************************************** SOLUTION *************************************************************************************/
-
-#include<iostream>
 using namespace std;
-int main() {
-	// Write your code here
-	char a;
-    cin>> a;
-    
-    if(a >='a' && a <='z'){
-        cout<<"0";
-    }
-    else if(a >= 'A' && a <= 'Z'){
-        cout<<"1";
-    }
-    else{
-        cout<<"-1";
-    }
+
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	
+	int n;
+	cin>>n;
+	string s;
+	std::cin>>s;
+
+	unordered_map<char, int> m1;
+
+	for (int i = 0; i < s.size(); ++i)
+	{
+		m1[s[i]]++;
+	}
+
+	cout << m1['a']<<" "<<m1['s']<<" "<<m1['p'] << '\n';
+
+	return 0 ; 
+
 }
