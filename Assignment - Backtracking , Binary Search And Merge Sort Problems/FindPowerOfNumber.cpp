@@ -1,45 +1,54 @@
-Check Case
+Find power of a number
 Send Feedback
-Write a program that takes a character as input and prints either 1, 0 or -1 according to the following rules.
-1, if the character is an uppercase alphabet (A - Z)
-0, if the character is a lowercase alphabet (a - z)
--1, if the character is not an alphabet
+Write a program to find x to the power n (i.e. x^n). Take x and n from the user. You need to print the answer.
+Note : For this question, you can assume that 0 raised to the power of 0 is 1
+
+
 Input format :
-Single Character
-Output format :
-1 or 0 or -1
-Constraints :
-Input can be any character
+Two integers x and n (separated by space)
+Output Format :
+x^n (i.e. x raise to the power n)
+Constraints:
+0 <= x <= 8 
+0 <= n <= 9
 Sample Input 1 :
-v
+ 3 4
 Sample Output 1 :
-0
+81
 Sample Input 2 :
-V
+ 2 5
 Sample Output 2 :
-1
-Sample Input 3 :
-#
-Sample Output 3 :
--1
+32
+	
+	
+/********************************************* SOLUTION ****************************************************/
+	
+	
+#include <bits/stdc++.h>
 
-
-/****************************************** SOLUTION *************************************************************************************/
-
-#include<iostream>
 using namespace std;
-int main() {
-	// Write your code here
-	char a;
-    cin>> a;
-    
-    if(a >='a' && a <='z'){
-        cout<<"0";
-    }
-    else if(a >= 'A' && a <= 'Z'){
-        cout<<"1";
-    }
-    else{
-        cout<<"-1";
-    }
+int power(int x, int n){
+	if (n==0)
+	{
+		return 1;
+	}
+
+	return x*power(x, n-1);
+
+
+}
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	
+	int x, n;
+	cin>>x>>n;
+
+	cout << power(x,n) << '\n';
+
+
+	return 0 ; 
+
 }
