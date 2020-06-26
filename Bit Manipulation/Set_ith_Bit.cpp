@@ -1,45 +1,26 @@
-Check Case
+Set ith bit
 Send Feedback
-Write a program that takes a character as input and prints either 1, 0 or -1 according to the following rules.
-1, if the character is an uppercase alphabet (A - Z)
-0, if the character is a lowercase alphabet (a - z)
--1, if the character is not an alphabet
-Input format :
-Single Character
-Output format :
-1 or 0 or -1
-Constraints :
-Input can be any character
+You are given two integers N and i. You need to make ith bit of binary representation of N to 1 and return the updated N.
+Counting of bits start from 0 from right to left.
+Input Format :
+Two integers N and i (separated by space)
+Output Format :
+Updated N
 Sample Input 1 :
-v
+4 1
 Sample Output 1 :
-0
+6
 Sample Input 2 :
-V
+4 4
 Sample Output 2 :
-1
-Sample Input 3 :
-#
-Sample Output 3 :
--1
+20
+	
+
+/******************************************************* SOLUTION ****************************************/
+	
 
 
-/****************************************** SOLUTION *************************************************************************************/
-
-#include<iostream>
-using namespace std;
-int main() {
-	// Write your code here
-	char a;
-    cin>> a;
-    
-    if(a >='a' && a <='z'){
-        cout<<"0";
-    }
-    else if(a >= 'A' && a <= 'Z'){
-        cout<<"1";
-    }
-    else{
-        cout<<"-1";
-    }
+int turnOnIthBit(int n, int i){
+    // kth bit of n is being set by this operation 
+    return ((1 << i) | n); 
 }
