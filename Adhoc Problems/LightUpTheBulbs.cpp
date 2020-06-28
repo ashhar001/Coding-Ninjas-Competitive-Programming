@@ -1,45 +1,132 @@
-Check Case
+Light Up the Bulbs
 Send Feedback
-Write a program that takes a character as input and prints either 1, 0 or -1 according to the following rules.
-1, if the character is an uppercase alphabet (A - Z)
-0, if the character is a lowercase alphabet (a - z)
--1, if the character is not an alphabet
-Input format :
-Single Character
-Output format :
-1 or 0 or -1
-Constraints :
-Input can be any character
-Sample Input 1 :
-v
-Sample Output 1 :
-0
-Sample Input 2 :
-V
-Sample Output 2 :
-1
-Sample Input 3 :
-#
-Sample Output 3 :
--1
+A bulb can be ‘ON’ or ‘OFF’. Mr. Navdeep got ‘n’ number of bulbs and their status, whether they are ‘ON’ or ‘OFF’. Their status is represented in a string of size ‘n’ consisting of 0’s and 1’s, where ‘0’ represents the bulb is in ‘OFF’ condition and ‘1’ represent the bulb is ‘ON’. Mr. Navdeep has been given the task to light up all the bulbs.
+He can perform two operations.
+First, chose any segment of bulbs and reverse them means chose any substring and reverse it. E.g. “0 110 001” -> “0 011 001”. Substring (1, 3) is reversed here. This operation will cost him Rs. ‘X’.
+Second, chose any segment of bulbs and reverse their present condition. i.e. if the bulb is ‘ON’, make it ‘OFF’ and if it is ‘OFF’, make it ‘ON’. E.g. “0 011 001” -> “0 100 001”. Substring (1, 3) is complemented. This operation will cost him Rs. ‘Y’.
+You need to help Mr. Navdeep that how much minimum amount it will require to make all the bulbs lightened. (or make all the characters as ‘1’ in the representation string)
+Input Format:
+The first line will contain three space separated integers: ‘n’, ‘X’, ‘Y’ denoting the number of bulbs, cost of first operation and cost of second operation respectively.
+The second line contains a representation string of length ‘n’ consisting of 0’s and 1’s representing whether the bulb is ‘OFF’ or ‘ON’.
+Output Format:
+Print a single integer denoting the minimum cost required to light up all the bulbs.
+Constraints:
+1 <= n <= 3,00,000
+0 <= X, Y <= 10^9
+Time Limit: 1 second
+Sample Input:
+5 1 10
+01000
+Sample Output:
+11
+Explanation:
+First, Reverse substring (0, 1): “01000” -> “10000”, COST = 1
+Second, Invert substring (1, 4): “10000” -> “11111”, COST = 10
+Total cost = 1+10 => 11
+	
+	
+/********************************************************* SOLUTION ***************************************************/
+	
 
-
-/****************************************** SOLUTION *************************************************************************************/
-
-#include<iostream>
+#include<iostream> 
+#include<climits> 
 using namespace std;
 int main() {
-	// Write your code here
-	char a;
-    cin>> a;
+    int n;
+    long x,y;
     
-    if(a >='a' && a <='z'){
-        cout<<"0";
-    }
-    else if(a >= 'A' && a <= 'Z'){
-        cout<<"1";
-    }
-    else{
-        cout<<"-1";
-    }
+    cin>>n>>x>>y;
+    
+    long ans=INT_MAX;
+    string s;
+    cin>>s;
+    string* ne=new string(); 
+    
+    long nz=0;
+    ne->append(1,s.at(0)); 
+    
+    if(s.at(0)=='0') 
+        nz++;
+    
+    for(int i=1;i<n;i++) { 
+        char c1=s.at(i); 
+        char c2=s.at(i-1);
+        if(c1!=c2) { 
+            ne->append(1,c1);
+            if(c1=='0') nz++;
+        }
+    } 
+    
+    if(nz==0)     
+        ans=0;
+    
+    else if(x<y)
+        ans=x*(nz-1)+y;
+    
+    else ans=nz*y;
+    cout<<ans; 
+
 }
+
+/*
+
+#include <bits/stdc++.h>
+
+using namespace std;
+long long go(long long* arr, long long n, long long x ,long long y){
+	long long breaks = 0;
+	if (arr[0]==0)
+	{
+		breaks++;
+	}
+	for (long long i = 0; i < n-1; ++i)
+	{
+		// cout <<arr[i]  << '\n';
+		// cout << arr[i+1] << '\n';
+		if (arr[i+1] == 0 && arr[i] == 1)
+		{
+			breaks++;
+		}
+	}
+
+	//cout << breaks << '\n';
+	if (breaks == 0)
+	{
+		return 0;
+	}
+	long long operation = breaks-1;
+
+	long long ans = operation*min(x,y)+y;
+	return ans;
+}
+
+int main( int argc , char ** argv )
+{
+	ios_base::sync_with_stdio(false) ; 
+	cin.tie(NULL) ; 
+	
+	long long n, x, y;
+	cin>>n>>x>>y;
+	
+	string str;
+	cin>>str;
+
+
+	long long* arr = new long long[n];
+
+	for (long long i = 0; i < n; ++i)
+	{
+		arr[i] = str[i]-'0';
+	}
+
+	cout << go(arr, n, x, y) << '\n';
+
+	delete [] arr;
+
+	return 0 ; 
+
+
+
+}
+
+*/
