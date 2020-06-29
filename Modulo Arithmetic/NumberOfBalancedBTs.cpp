@@ -1,45 +1,68 @@
-Check Case
+Number Of Balanced BTs
 Send Feedback
-Write a program that takes a character as input and prints either 1, 0 or -1 according to the following rules.
-1, if the character is an uppercase alphabet (A - Z)
-0, if the character is a lowercase alphabet (a - z)
--1, if the character is not an alphabet
-Input format :
-Single Character
-Output format :
-1 or 0 or -1
-Constraints :
-Input can be any character
-Sample Input 1 :
-v
-Sample Output 1 :
-0
-Sample Input 2 :
-V
-Sample Output 2 :
-1
-Sample Input 3 :
-#
-Sample Output 3 :
--1
+Given an integer h, find the possible number of balanced binary trees of height h. You just need to return the count of possible binary trees which are balanced.
+This number can be huge, so return output modulus 10^9 + 7.
+Write a simple recursive solution.
+Input Format :
+Integer h
+Output Format :
+Count % 10^9 + 7
+Input Constraints :
+1 <= h <= 40
+Sample Input 1:
+3
+Sample Output 1:
+15
+Sample Input 2:
+4
+Sample Output 2:
+315
+	
+	
+/********************************************************* SOLUTION *************************************************************************/
+	
 
+	
+#include <cmath> 
 
-/****************************************** SOLUTION *************************************************************************************/
-
-#include<iostream>
-using namespace std;
-int main() {
-	// Write your code here
-	char a;
-    cin>> a;
+int balancedBTs(int h) {
     
-    if(a >='a' && a <='z'){
-        cout<<"0";
+    if(h <= 1) {
+        
+        return 1;
+    
     }
-    else if(a >= 'A' && a <= 'Z'){
-        cout<<"1";
-    }
-    else{
-        cout<<"-1";
-    }
+    
+    int mod = (int) (pow(10, 9)) + 7; 
+    int x = balancedBTs(h - 1);
+    int y = balancedBTs(h - 2);
+    int temp1 = (int)(((long)(x)*x) % mod);
+    int temp2 = (int)((2* (long)(x) * y) % mod);
+    int ans = (temp1 + temp2) % mod; return ans;
+
 }
+
+
+/*
+#include<bits/stdc++.h>
+using namespace std;
+int balancedBTs(int h) {
+  if(h==0 || h==1){
+		return 1;
+	}
+
+	int m = 1000000000 + 7;    //1000000000 = pow(10,9)
+	int x = balancedBTs(h-1);
+	int y = balancedBTs(h-2);
+
+	long res1 = (long)x*x;
+	long res2 = (long)x*y*2;
+
+	int ans1 = (int)(res1%m);
+	int ans2 = (int)(res2%m);
+
+	int ans = (ans1+ans2)%m;
+
+	return ans;
+}
+*/
