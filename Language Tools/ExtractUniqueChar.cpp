@@ -19,25 +19,18 @@ abcde
 /************************************************** SOLUTION ***********************************************/
 
 
-#include<cstring>
-#include<algorithm>
-#include<iostream>
-#include<set>
-#include<unordered_map>
+#include<unordered_set>
 
-char* uniqueChar(char *str){
-   unordered_map<char,int> unique;
-    char *res=new char[50000];
-    int k=0;
-    for(int i=0;i<strlen(str);i++)
-    {
-        if(unique[str[i]]==0)
-        {
-            res[k]=str[i];
-            k++;
-            unique[str[i]]++;
+string uniqueChar (string str) {
+    string answer;
+    unordered_set<char> charSet;
+    
+    for (char ch: str) {
+        if (charSet.find(ch)==charSet.end()) {
+            answer.push_back(ch);
+            charSet.insert(ch);
         }
     }
-    return res;
-
+    
+    return answer;
 }
